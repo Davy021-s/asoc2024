@@ -27,6 +27,10 @@ def get_bookings_as_json():
 
 @app.route("/bookings")
 def bookings():
+    return send_file('src/bookings.html')
+
+@app.route("/api/bookings")
+def api_bookings():
   return get_bookings_as_json()
 
 @app.route("/")

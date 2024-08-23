@@ -24,8 +24,6 @@ fetch('/api/bookings')
     });
   }
   
-
-
 function getBookings() {
   const username = document.getElementById('username').value;
 

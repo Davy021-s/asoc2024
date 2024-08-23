@@ -13,7 +13,7 @@ function showBookingsTable(bookings) {
         <th>User Name</th>
         <th>Date</th>
         <th>Start Hour</th>
-        <th>End Hour</th>
+        <th>Merdone</th>
       </tr>
     </thead>
     <tbody>

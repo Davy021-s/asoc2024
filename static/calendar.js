@@ -21,15 +21,19 @@ async function getBookings() {
       timeCell.textContent = orario;
       row.appendChild(timeCell);
   
-      const booking = bookings.find(b => b.start_hour === orario && b.date === oggi); // Controlla data e ora
+      const booking = bookings.find(b => 
+        b.date === oggi && 
+        orario >= b.start_hour && 
+        orario < b.end_hour
+      ); // Controlla data e ora
       const statusCell = document.createElement('td');
   
       if (booking) {
         statusCell.textContent = 'Nome Utente: ' + booking.user_name;
-        statusCell.style.backgroundColor = 'red';
+        statusCell.style.backgroundColor = 'purple';
       } else {
         statusCell.textContent = 'Libero';
-        statusCell.style.backgroundColor = 'green';
+        statusCell.style.backgroundColor = 'pink';
         const button = document.createElement('button');
         button.textContent = 'Prenota';
        
@@ -39,7 +43,7 @@ async function getBookings() {
           console.log(`Prenotazione per ${orario}`);
         });
         statusCell.appendChild(button);
-        button.style.backgroundColor = 'blue';
+        button.style.backgroundColor = 'black';
         button.style.color = 'white';
         button.style.border = 'none';
         button.style.padding = '5px 10px';

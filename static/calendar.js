@@ -12,7 +12,8 @@ async function getBookings() {
     const calendar = document.getElementById('calendar');
     const orari = Array.from({ length: 16 }, (_, i) => `${i + 8}:00`); 
     const oggi = new Date().toISOString().split('T')[0]; // Ottieni la data odierna (YYYY-MM-DD)
-
+    const dataodierna= document.getElementById('oggi');
+    dataodierna.textContent = oggi;
   
     orari.forEach(orario => {
       const row = document.createElement('tr');

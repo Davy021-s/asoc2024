@@ -4,32 +4,27 @@ fetch('/api/bookings')
     showBookingsTable(bookings);
   });
 
-function showBookingsTable(bookings) {
-  const table = document.createElement('table');
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th>Court ID</th>
-        <th>User Name</th>
-        <th>Date</th>
-        <th>Start Hour</th>
-        <th>End Hour</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${bookings.map(booking => `
-        <tr>
-          <td>${booking.court_id}</td>
-          <td>${booking.user_name}</td>
-          <td>${booking.date}</td>
-          <td>${booking.start_hour}</td>
-          <td>${booking.end_hour}</td>
-        </tr>
-      `).join('')}
-    </tbody>
-  `;
-  document.getElementById('bookings-table').appendChild(table);
-}
+  function showBookingsTable(bookings) {
+    const bookingsDiv = document.getElementById('bookings-table');
+    bookingsDiv.innerHTML = ''; // Clear previous results
+  
+    bookings.forEach(booking => {
+      const bookingDiv = document.createElement('div');
+      bookingDiv.classList.add('booking-rectangle'); // Add a class for styling
+  
+      bookingDiv.innerHTML = `
+        <p>ID Campo: ${booking.court_id}</p>
+        <p>Nome Utente: ${booking.user_name}</p>
+        <p>Data: ${booking.date}</p>
+        <p>Ora d'inzio: ${booking.start_hour}</p>
+        <p>Ora di Fine: ${booking.end_hour}</p>
+      `;
+  
+      bookingsDiv.appendChild(bookingDiv);
+    });
+  }
+  
+
 
 function getBookings() {
   const username = document.getElementById('username').value;

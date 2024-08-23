@@ -25,17 +25,26 @@ async function getBookings() {
       const statusCell = document.createElement('td');
   
       if (booking) {
-        statusCell.textContent = 'Occupato';
+        statusCell.textContent = 'Nome Utente: ' + booking.user_name;
+        statusCell.style.backgroundColor = 'red';
       } else {
         statusCell.textContent = 'Libero';
+        statusCell.style.backgroundColor = 'green';
         const button = document.createElement('button');
         button.textContent = 'Prenota';
+       
         // Aggiungi event listener al bottone per gestire la prenotazione
         button.addEventListener('click', () => {
           // Implementa la logica di prenotazione qui
           console.log(`Prenotazione per ${orario}`);
         });
         statusCell.appendChild(button);
+        button.style.backgroundColor = 'blue';
+        button.style.color = 'white';
+        button.style.border = 'none';
+        button.style.padding = '5px 10px';
+        button.style.borderRadius = '5px';
+        button.style.cursor = 'pointer';
       }
   
       row.appendChild(statusCell);

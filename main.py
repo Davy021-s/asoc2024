@@ -92,11 +92,14 @@ def api_book():
   end_hour = request.form.get('end_hour')
   court_id = request.form.get('court_id')
   date = request.form.get('date')
-  cursor.execute('''
-    INSERT INTO bookings (court_id, user_name, date, start_hour, end_hour)
-    VALUES (?, ?, ?, ?, ?)
-  ''', (court_id, user_name, date, start_hour, end_hour))
-  conn.commit()
+  for m in range(int(start_hour.split(':')[0]), int(end_hour.split(':')[0])):
+    shour = str(m) + ':00'
+    ehour = str(m + 1) + ':00'
+    cursor.execute('''
+      INSERT INTO bookings (court_id, user_name, date, start_hour, end_hour)
+      VALUES (?, ?, ?, ?, ?)
+    ''', (court_id, user_name, date, shour, ehour))
+    conn.commit()
   conn.close()
   return jsonify({'message': 'Prenotazione effettuata!'})
 

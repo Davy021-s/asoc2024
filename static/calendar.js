@@ -92,12 +92,11 @@ async function getBookings() {
     .then(response => response.json())
     .then(data => {
       alert(data.message);
+      location.reload();
     })
     .catch(error => {
       console.error('Errore:', error);
       alert('Si è verificato un errore durante la prenotazione.');
-
-
     });
   }
 

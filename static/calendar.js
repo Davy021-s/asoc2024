@@ -15,6 +15,8 @@ async function getBookings() {
     const dataodierna= document.getElementById('oggi');
     dataodierna.textContent = oggi;
   
+    
+
     orari.forEach(orario => {
       const row = document.createElement('tr');
       const timeCell = document.createElement('td');
@@ -40,7 +42,11 @@ async function getBookings() {
         button.style.padding = '5px 10px';
         button.style.borderRadius = '5px';
         button.style.cursor = 'pointer';
-
+        console.log(booking.start_hour)
+        button.addEventListener('click', () => {
+          // Implementa la logica di cancellazione qui
+          cancella(booking.user_name, booking.date, orario, incrementa_orario(orario), booking.court_id);
+        }, false);
       } else {
         statusCell.textContent = 'Libero';
         statusCell.style.backgroundColor = 'pink';
@@ -71,3 +77,33 @@ async function getBookings() {
     createCalendar(bookings);
   });
   
+  function cancella(username, date, start, end, court) {
+    // Implementa la logica di cancellazione qui
+    console.log('Cancella');
+    console.log(username, date, start, end, court)
+  
+    fetch('/api/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `user_name=${username}&court_id=${court}&date=${date}&start_hour=${start}&end_hour=${end}`,
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(data.message);
+    })
+    .catch(error => {
+      console.error('Errore:', error);
+      alert('Si è verificato un errore durante la prenotazione.');
+
+
+    });
+  }
+
+function incrementa_orario(orario) {
+  orario_successivo = orario.split(':');
+  orario_successivo[0] = parseInt(orario_successivo[0]) + 1;
+  orario_successivo = orario_successivo.join(':');
+  return orario_successivo;
+}

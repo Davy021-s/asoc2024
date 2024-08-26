@@ -1,3 +1,4 @@
+import logging
 import os
 import sqlite3
 import json
@@ -46,10 +47,17 @@ def api_delete():
   end_hour = request.form.get('end_hour')
   court_id = request.form.get('court_id')
   date = request.form.get('date')
-  cursor.execute(''' DELETE FROM bookings WHERE court_id = ? AND user_name = ? AND date = ? AND start_hour = ? AND end_hour = ?''', (court_id, user_name, date, start_hour, end_hour))
+  cursor.execute('''
+  DELETE FROM bookings
+  WHERE court_id = ?
+  AND user_name = ?
+  AND date = ?
+  AND start_hour = ?
+  AND end_hour = ?;
+  ''', (court_id, user_name, date, start_hour, end_hour))
   conn.commit()
   conn.close()
-  return jsonify({'message': 'Cancellazione effettuata!'})
+  return jsonify({'message': 'Cancellazione effettuata! {} {} {} {} {}'.format(user_name,  start_hour, end_hour, court_id, date)})
 
 @app.route("/api/user/<username>")
 def get_user_bookings(username):

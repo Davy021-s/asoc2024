@@ -24,13 +24,23 @@ async function getBookings() {
       const booking = bookings.find(b => 
         b.date === oggi && 
         orario >= b.start_hour && 
-        orario < b.end_hour
-      ); // Controlla data e ora
+        orario < b.end_hour// Controlla data e ora
+      ); 
       const statusCell = document.createElement('td');
-  
+
       if (booking) {
         statusCell.textContent = 'Nome Utente: ' + booking.user_name;
         statusCell.style.backgroundColor = 'purple';
+        const button = document.createElement('button');
+        button.textContent = 'Cancella'; 
+        statusCell.appendChild(button);
+        button.style.backgroundColor = 'black';
+        button.style.color = 'white';
+        button.style.border = 'none';
+        button.style.padding = '5px 10px';
+        button.style.borderRadius = '5px';
+        button.style.cursor = 'pointer';
+
       } else {
         statusCell.textContent = 'Libero';
         statusCell.style.backgroundColor = 'pink';

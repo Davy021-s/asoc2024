@@ -37,6 +37,20 @@ def bookings():
 def api_bookings():
   return get_bookings_as_json()
 
+@app.route("/api/delete", methods=['POST'])
+def api_delete():
+  conn = sqlite3.connect('bookings.db')
+  cursor = conn.cursor()
+  user_name = request.form.get('user_name')
+  start_hour = request.form.get('start_hour')
+  end_hour = request.form.get('end_hour')
+  court_id = request.form.get('court_id')
+  date = request.form.get('date')
+  cursor.execute(''' DELETE FROM bookings WHERE court_id = ? AND user_name = ? AND date = ? AND start_hour = ? AND end_hour = ?''', (court_id, user_name, date, start_hour, end_hour))
+  conn.commit()
+  conn.close()
+  return jsonify({'message': 'Cancellazione effettuata!'})
+
 @app.route("/api/user/<username>")
 def get_user_bookings(username):
     try:

@@ -2,10 +2,11 @@ import logging
 import os
 import sqlite3
 import json
+import datetime
 
-from flask import Flask, send_file, request, jsonify
+from flask import Flask, send_file, request, jsonify, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='src')
 
 def get_bookings_as_json():
   conn = sqlite3.connect('bookings.db')
@@ -32,7 +33,9 @@ def book():
 
 @app.route("/bookings")
 def bookings():
-    return send_file('src/bookings.html')
+  # If date is not in the query string, use today's date in the format YYYY-MM-DD
+  date = request.args.get('date', datetime.datetime.now().strftime('%Y-%m-%d'))
+  return render_template('bookings.html', date=date) # passa la data al template
 
 @app.route("/api/bookings")
 def api_bookings():

@@ -11,7 +11,9 @@ async function getBookings() {
   function createCalendar(bookings) {
     const calendar = document.getElementById('calendar');
     const orari = Array.from({ length: 16 }, (_, i) => `${i + 8}:00`); 
-    const oggi = new Date().toISOString().split('T')[0]; // Ottieni la data odierna (YYYY-MM-DD)
+    const oggi = date;
+    console.log(oggi);
+  
     const dataodierna= document.getElementById('oggi');
     dataodierna.textContent = oggi;
   

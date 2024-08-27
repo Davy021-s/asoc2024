@@ -25,8 +25,8 @@ async function getBookings() {
   
       const booking = bookings.find(b => 
         b.date === oggi && 
-        orario >= b.start_hour && 
-        orario < b.end_hour// Controlla data e ora
+        parseInt(orario) >= parseInt(b.start_hour) && 
+        parseInt(orario) < parseInt(b.end_hour)// Controlla data e ora
       ); 
       const statusCell = document.createElement('td');
 

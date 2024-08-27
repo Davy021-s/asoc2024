@@ -16,16 +16,17 @@
 
   <form id="bookingForm">
     <label for="date">Data (YYYY-MM-DD):</label>
-    <input type="date" id="date" name="date" required><br><br>
+    <input id="calendariohome" type="date" name="date" required><br><br>
     <button type="submit">visualizza prenotazioni</button>
     <script>
       const form = document.getElementById('bookingForm');
       form.addEventListener('submit', (event) => {
         event.preventDefault();
-        const date = document.getElementById('date').value;
+        const date = document.getElementById('calendariohome').value;
         console.log(date);
         window.location.href = '/bookings?date=' + date;
       });
+      document.getElementById('calendariohome').valueAsDate = new Date();
     </script>
   </form>
 

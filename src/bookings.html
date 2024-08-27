@@ -6,15 +6,42 @@
 </head>
 <body>
   <h1>Bookings</h1>
+  <div>
+    <button id="prevDay">Giorno precedente</button>
+    <button id="nextDay">Giorno successivo</button>
+  </div>
+
   <h2 id="oggi">Calendar</h2>
   <div id="calendar"></div>
 
   <script>
     var date = "{{ date }}"
+    const dateobj = new Date(date); // Converti la data in un oggetto Date
+
   </script>
 
   <script src="/static/calendar.js">
   </script>
+
+<script>
+  const prevDayButton = document.getElementById("prevDay");
+  const nextDayButton = document.getElementById("nextDay");
+  const bookingsDiv = document.getElementById("bookings");
+  function updateBookings(date) {
+    const formattedDate = date.toISOString().split('T')[0]; // Formatta la data come YYYY-MM-DD
+    console.log(formattedDate)
+    // Load /bookings?date=YYYY-MM-DD
+    window.location.href = `/bookings?date=${formattedDate}`;
+  }
+  prevDayButton.addEventListener("click", () => {
+    dateobj.setDate(dateobj.getDate() - 1); // Decrementa la data di un giorno
+    updateBookings(dateobj);
+  });
+  nextDayButton.addEventListener("click", () => {
+    dateobj.setDate(dateobj.getDate() + 1); // Incrementa la data di un giorno
+    updateBookings(dateobj);
+  });
+</script>
 
 </body>
 </html>

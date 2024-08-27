@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Booking App</title>
 </head>
+
 <body>
   <h1>Get User Bookings</h1>
   <input type="text" id="username" placeholder="Enter username">
@@ -10,5 +12,23 @@
 
   <div id="bookings"></div>
   <script src="/static/bookings.js"></script>
+
+
+  <form id="bookingForm">
+    <label for="date">Data (YYYY-MM-DD):</label>
+    <input type="date" id="date" name="date" required><br><br>
+    <button type="submit">visualizza prenotazioni</button>
+    <script>
+      const form = document.getElementById('bookingForm');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const date = document.getElementById('date').value;
+        console.log(date);
+        window.location.href = '/bookings?date=' + date;
+      });
+    </script>
+  </form>
+
 </body>
+
 </html>

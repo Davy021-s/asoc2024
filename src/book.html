@@ -27,7 +27,10 @@
 
     <button type="submit">Prenota</button>
   </form>
- 
+  <div style='margin:10px; '>
+    <button style="background-color:green; border-color:black; color:white;" onclick="window.location.href='/bookings'">Home</button>
+  </div>
+
   <script>
     var date = "{{ date }}"
     const dateobj = new Date(date); // Converti la data in un oggetto Date

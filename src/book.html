@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Prenota Campo da Tennis</title>
 </head>
+
 <body>
   <h1>Prenota un Campo</h1>
   <form id="bookingForm">
@@ -13,16 +15,23 @@
     <input type="number" id="court_id" name="court_id" required><br><br>
 
     <label for="date">Data (YYYY-MM-DD):</label>
-    <input type="date" id="date" name="date" required><br><br>
+    <input type="date" value="{{ date }}" id="date" name="date" required><br><br>
 
     <label for="start_hour">Ora Inizio:</label>
- <input type="time" id="start_hour" name="start_hour" min="07:00" max="23:00" required onchange="setMinutes(this)"><br><br>
+    <input type="time" id="start_hour" name="start_hour" min="07:00" max="23:00" value="{{ start_hour }}" required
+      onchange="setMinutes(this)"><br><br>
 
-   <label for="end_hour">Ora Fine:</label>
- <input type="time" id="end_hour" name="end_hour" min="07:00" max="23:00" required onchange="setMinutes(this)"><br><br>
+    <label for="end_hour">Ora Fine:</label>
+    <input type="time" id="end_hour" name="end_hour" min="07:00" max="23:00" value="{{ end_hour }}" required
+      onchange="setMinutes(this)"><br><br>
 
     <button type="submit">Prenota</button>
   </form>
+ 
+  <script>
+    var date = "{{ date }}"
+    const dateobj = new Date(date); // Converti la data in un oggetto Date
+  </script>
 
   <script>
     const form = document.getElementById('bookingForm');
@@ -42,20 +51,21 @@
         },
         body: `user_name=${user_name}&court_id=${court_id}&date=${date}&start_hour=${start_hour}&end_hour=${end_hour}`,
       })
-      .then(response => response.json())
-      .then(data => {
-        alert(data.message);
-        form.reset();
-      })
-      .catch(error => {
-        console.error('Errore:', error);
-        alert('Si è verificato un errore durante la prenotazione.');
-      });
+        .then(response => response.json())
+        .then(data => {
+          alert(data.message);
+          form.reset();
+        })
+        .catch(error => {
+          console.error('Errore:', error);
+          alert('Si è verificato un errore durante la prenotazione.');
+        });
     });
 
     function setMinutes(input) {
-  input.value = input.value.substring(0, 3) + "00";
-}
+      input.value = input.value.substring(0, 3) + "00";
+    }
   </script>
 </body>
+
 </html>

@@ -29,7 +29,10 @@ def get_bookings_as_json():
 
 @app.route("/book")
 def book():
-    return send_file('src/book.html')
+  date = request.args.get('date', datetime.datetime.now().strftime('%Y-%m-%d'))
+  start_hour = request.args.get('start_hour', '07:00')
+  end_hour = request.args.get('end_hour', '23:00')
+  return render_template('book.html', date=date, start_hour=start_hour, end_hour=end_hour) # passa la data al template
 
 @app.route("/bookings")
 def bookings():

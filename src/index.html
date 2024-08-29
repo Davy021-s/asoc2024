@@ -6,29 +6,38 @@
 </head>
 
 <body>
-  <h1>Get User Bookings</h1>
-  <input type="text" id="username" placeholder="Enter username">
-  <button onclick="getBookings()">Get Bookings</button>
+
+</div>
+  <div style='margin:10px; '>
+    <h2>Calendario</h2>
+    <form id="bookingForm">
+      <label for="date">Data</label>
+      <input id="calendariohome" type="date" name="date" required><br><br>
+      <button type="submit">Visualizza Prenotazioni</button>
+      <script>
+        const form = document.getElementById('bookingForm');
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const date = document.getElementById('calendariohome').value;
+          console.log(date);
+          window.location.href = '/bookings?date=' + date;
+        });
+        document.getElementById('calendariohome').valueAsDate = new Date();
+      </script>
+    </form>
+  </div>
+  <div>
+    <h2>Nuova Prenotazione</h2>
+    <button style="background-color:green; border-color:black; color:white;" oclick="window.location.href='/book'">Prenota</button>
+  
+  <div>
+    <h2>Visualizza prenotazioni utente</h2>
+    <input type="text" id="username" placeholder="Nome Utente">
+    <button onclick="getBookings()">Visualizza</button>
+  </div>
 
   <div id="bookings"></div>
   <script src="/static/bookings.js"></script>
-
-
-  <form id="bookingForm">
-    <label for="date">Data (YYYY-MM-DD):</label>
-    <input id="calendariohome" type="date" name="date" required><br><br>
-    <button type="submit">visualizza prenotazioni</button>
-    <script>
-      const form = document.getElementById('bookingForm');
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const date = document.getElementById('calendariohome').value;
-        console.log(date);
-        window.location.href = '/bookings?date=' + date;
-      });
-      document.getElementById('calendariohome').valueAsDate = new Date();
-    </script>
-  </form>
 
 </body>
 

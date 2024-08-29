@@ -113,6 +113,9 @@ function incrementa_orario(orario) {
 function book(date, start, end) {
   // Implementa la logica di prenotazione qui
   console.log('Prenota');
-//redirect alla pagina book.html
+  // ensure that start hour and end hour are always on twi digits
+  start = start.padStart(5, '0');
+  end = end.padStart(5, '0');
+  console.log(date, start, end);
   window.location.href =  'book?date=' + date + '&start_hour=' + start + '&end_hour=' + end;
 };

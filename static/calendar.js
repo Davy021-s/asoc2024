@@ -57,7 +57,7 @@ async function getBookings() {
        
         // Aggiungi event listener al bottone per gestire la prenotazione
         button.addEventListener('click', () => {
-          book();
+          book(oggi, orario, incrementa_orario(orario));
           // Implementa la logica di prenotazione qui
           console.log(`Prenotazione per ${orario}`);
         });
@@ -110,9 +110,9 @@ function incrementa_orario(orario) {
   return orario_successivo;
 }
 
-function book(username, date, start, end, court) {
+function book(date, start, end) {
   // Implementa la logica di prenotazione qui
   console.log('Prenota');
 //redirect alla pagina book.html
-  window.location.href = '/book';
-}
+  window.location.href =  'book?date=' + date + '&start_hour=' + start + '&end_hour=' + end;
+};

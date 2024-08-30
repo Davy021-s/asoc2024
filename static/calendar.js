@@ -1,7 +1,10 @@
-// Questo codice è solo un esempio e potrebbe richiedere adattamenti 
-// in base al tuo backend e framework.
-
 // Funzione per ottenere i dati degli appuntamenti dal backend
+const court_id = document.getElementById('court_id');
+court_id.addEventListener('change', function() {
+  window.location.href = '/bookings?date=' + date + '&court_id=' + court_id.value;
+});
+
+
 async function getBookings() {
     const response = await fetch('/api/bookings');
     return await response.json();
@@ -17,18 +20,18 @@ async function getBookings() {
     const dataodierna= document.getElementById('oggi');
     dataodierna.textContent = oggi;
   
-    
-
     orari.forEach(orario => {
       const row = document.createElement('tr');
       const timeCell = document.createElement('td');
       timeCell.textContent = orario;
       row.appendChild(timeCell);
-  
+      court_id.value = selected_court_id;
+
       const booking = bookings.find(b => 
         b.date === oggi && 
         parseInt(orario) >= parseInt(b.start_hour) && 
         parseInt(orario) < parseInt(b.end_hour)// Controlla data e ora
+        && b.court_id == selected_court_id
       ); 
       const statusCell = document.createElement('td');
 

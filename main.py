@@ -38,7 +38,8 @@ def book():
 def bookings():
   # If date is not in the query string, use today's date in the format YYYY-MM-DD
   date = request.args.get('date', datetime.datetime.now().strftime('%Y-%m-%d'))
-  return render_template('bookings.html', date=date) # passa la data al template
+  court_id = request.args.get('court_id', '1')
+  return render_template('bookings.html', date=date, court_id=court_id) # passa la data al template
 
 @app.route("/api/bookings")
 def api_bookings():

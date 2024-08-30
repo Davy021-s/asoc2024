@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Bookings</title>
-  <link rel="stylesheet" href="static/main.css">  
+  <link rel="stylesheet" href="static/main.css">
 </head>
+
 <body>
-  <button style="background-color:green; border-color:black; color:white;" onclick="window.location.href='/'">Home</button>
- 
+  <div style='margin:10px; '>
+    <button style="background-color:green; border-color:black; color:white;"
+      onclick="window.location.href='/'">Home</button>
+  </div>
+
   <h1>Prenotazioni</h1>
   <div>
     <button id="prevDay"><</button>
@@ -14,36 +19,44 @@
   </div>
 
   <h2 id="oggi">Calendar</h2>
+    <label for="court_id">Numero Campo:</label>
+    <select id="court_id" name="court_id" required>
+      <!-- Suggested code may be subject to a license. Learn more: ~LicenseLog:819140571. -->
+      <option value="1">Campo 1</option>
+      <option value="2">Campo 2</option>
+      <option value="3">Campo 3</option>
+    </select><br><br>
   <div id="calendar"></div>
 
-  <script>
+   <script>
     var date = "{{ date }}"
     const dateobj = new Date(date); // Converti la data in un oggetto Date
-
+    var selected_court_id = "{{ court_id }}"
   </script>
 
   <script src="/static/calendar.js">
   </script>
 
-<script>
-  const prevDayButton = document.getElementById("prevDay");
-  const nextDayButton = document.getElementById("nextDay");
-  const bookingsDiv = document.getElementById("bookings");
-  function updateBookings(date) {
-    const formattedDate = date.toISOString().split('T')[0]; // Formatta la data come YYYY-MM-DD
-    console.log(formattedDate)
-    // Load /bookings?date=YYYY-MM-DD
-    window.location.href = `/bookings?date=${formattedDate}`;
-  }
-  prevDayButton.addEventListener("click", () => {
-    dateobj.setDate(dateobj.getDate() - 1); // Decrementa la data di un giorno
-    updateBookings(dateobj);
-  });
-  nextDayButton.addEventListener("click", () => {
-    dateobj.setDate(dateobj.getDate() + 1); // Incrementa la data di un giorno
-    updateBookings(dateobj);
-  });
-</script>
+  <script>
+    const prevDayButton = document.getElementById("prevDay");
+    const nextDayButton = document.getElementById("nextDay");
+    const bookingsDiv = document.getElementById("bookings");
+    function updateBookings(date) {
+      const formattedDate = date.toISOString().split('T')[0]; // Formatta la data come YYYY-MM-DD
+      console.log(formattedDate)
+      // Load /bookings?date=YYYY-MM-DD
+      window.location.href = `/bookings?date=${formattedDate}`;
+    }
+    prevDayButton.addEventListener("click", () => {
+      dateobj.setDate(dateobj.getDate() - 1); // Decrementa la data di un giorno
+      updateBookings(dateobj);
+    });
+    nextDayButton.addEventListener("click", () => {
+      dateobj.setDate(dateobj.getDate() + 1); // Incrementa la data di un giorno
+      updateBookings(dateobj);
+    });
+  </script>
 
 </body>
+
 </html>

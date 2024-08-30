@@ -30,11 +30,14 @@
     <input type="time" id="end_hour" name="end_hour" min="07:00" max="23:00" value="{{ end_hour }}" required
       onchange="setMinutes(this)"><br><br>
 
+      <div style='margin:10px; '>
     <button type="submit">Prenota</button>
+</div>
   </form>
   <div style='margin:10px; '>
-    <button style="background-color:green; border-color:black; color:white;" onclick="window.location.href='/bookings'">Home</button>
+    <button style="background-color:green; border-color:black; color:white;" onclick="window.location.href='/bookings'">Indietro</button>
   </div>
+
 
   <script>
     var date = "{{ date }}"

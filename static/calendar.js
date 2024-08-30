@@ -60,7 +60,7 @@ async function getBookings() {
        
         // Aggiungi event listener al bottone per gestire la prenotazione
         button.addEventListener('click', () => {
-          book(oggi, orario, incrementa_orario(orario));
+          book(oggi, orario, incrementa_orario(orario), selected_court_id);
           // Implementa la logica di prenotazione qui
           console.log(`Prenotazione per ${orario}`);
         });
@@ -113,12 +113,12 @@ function incrementa_orario(orario) {
   return orario_successivo;
 }
 
-function book(date, start, end) {
+function book(date, start, end, court_id) {
   // Implementa la logica di prenotazione qui
   console.log('Prenota');
   // ensure that start hour and end hour are always on twi digits
   start = start.padStart(5, '0');
   end = end.padStart(5, '0');
   console.log(date, start, end);
-  window.location.href =  'book?date=' + date + '&start_hour=' + start + '&end_hour=' + end;
+  window.location.href =  'book?date=' + date + '&start_hour=' + start + '&end_hour=' + end + '&court_id=' + court_id ;
 };

@@ -32,7 +32,8 @@ def book():
   date = request.args.get('date', datetime.datetime.now().strftime('%Y-%m-%d'))
   start_hour = request.args.get('start_hour', '07:00')
   end_hour = request.args.get('end_hour', '23:00')
-  return render_template('book.html', date=date, start_hour=start_hour, end_hour=end_hour) # passa la data al template
+  court_id = request.args.get('court_id', '1')
+  return render_template('book.html', date=date, start_hour=start_hour, end_hour=end_hour, court_id=court_id) # passa la data al template
 
 @app.route("/bookings")
 def bookings():
